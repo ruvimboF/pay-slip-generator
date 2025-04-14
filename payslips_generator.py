@@ -3,6 +3,42 @@ import pandas as pd
 from fpdf import FPDF
 import yagmail
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv("C:/Users/uncommonstudent/Desktop/PAY SLIP GENERATOR PROJECT/.env")
+
+from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# Print current working directory to verify location
+print(f"Current directory: {Path.cwd()}")
+
+# Load .env file explicitly with path verification
+env_path = Path('.') / '.env'
+print(f".env file exists: {env_path.exists()}")
+print(f".env file contents:\n{env_path.read_text()}")
+
+load_dotenv(dotenv_path=str(env_path))
+
+
+try:
+    email = os.getenv('EMAIL_ADDRESS')
+    password = os.getenv('EMAIL_PASSWORD')
+    
+    print("Environment variables loaded successfully:")
+    print(f"Email address: {email}")
+    print(f"Password set: {'yes' if password else 'no'}")
+except Exception as e:
+    print(f"Error loading environment variables: {str(e)}")                 
+# Fetch email credentials from .env file
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")
+SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")
+
+# Ensure credentials exist
+if not SENDER_EMAIL or not SENDER_PASSWORD:
+    raise ValueError("Email credentials are not set in the .env file!")
 
 # Load Excel File and Strip Whitespace from Column Names
 df = pd.read_excel("employees.xlsx")
@@ -93,9 +129,6 @@ for _, row in df.iterrows():
 print("Payslips generated successfully!")
 
 # Email Setup
-SENDER_EMAIL = ""
-SENDER_PASSWORD = ""  # Use a valid Gmail App Password (Consider using environment variables for better security)
-
 try:
     yag = yagmail.SMTP(SENDER_EMAIL, SENDER_PASSWORD)
     print("✅ Connected to Gmail SMTP server.")
