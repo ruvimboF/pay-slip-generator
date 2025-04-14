@@ -68,7 +68,7 @@ class PayslipPDF(FPDF):
             self.cell(0, 10, str(value), border=1, ln=True, align="L")
 
 # Generate and Save Payslip PDFs to the Specified Folder
-output_folder = "C:/Users/uncommonstudent/DESKTOP/LOVE LLOYD/"
+output_folder = "C:/Users/uncommonstudent/DESKTOP/rue.rue/"
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)  # Create the folder if it doesn't exist
 
@@ -93,8 +93,8 @@ for _, row in df.iterrows():
 print("Payslips generated successfully!")
 
 # Email Setup
-SENDER_EMAIL = "ruvimbo448@gmail.com"
-SENDER_PASSWORD = "idmwfseqhbnnovsg"  # Use a valid Gmail App Password (Consider using environment variables for better security)
+SENDER_EMAIL = ""
+SENDER_PASSWORD = ""  # Use a valid Gmail App Password (Consider using environment variables for better security)
 
 try:
     yag = yagmail.SMTP(SENDER_EMAIL, SENDER_PASSWORD)
